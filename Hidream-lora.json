@@ -1,0 +1,718 @@
+{
+  "last_node_id": 81,
+  "last_link_id": 181,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 1340,
+        "1": -20
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 160
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 107
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            51
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": {
+        "0": 1570,
+        "1": -20
+      },
+      "size": {
+        "0": 966.615966796875,
+        "1": 1025.3206787109375
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 51
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 53,
+      "type": "EmptySD3LatentImage",
+      "pos": {
+        "0": 640,
+        "1": 500
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            100
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptySD3LatentImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 75,
+      "type": "Note",
+      "pos": {
+        "0": 1017,
+        "1": 420
+      },
+      "size": {
+        "0": 415.6177062988281,
+        "1": 395.4561462402344
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "## Official sampling settings\n\nProvided for reference, my workflows may have slightly different settings.\n\n### HiDream Full\n\n* hidream_i1_full_fp16.safetensors\n* shift: 3.0\n* steps: 50\n* sampler: uni_pc\n* scheduler: simple\n* cfg: 5.0\n\n### HiDream Dev\n\n* hidream_i1_dev_bf16.safetensors\n* shift: 6.0\n* steps: 28\n* sampler: lcm\n* scheduler: normal\n* cfg: 1.0 (no negative prompt)\n\n### HiDream Fast\n\n* hidream_i1_fast_bf16.safetensors\n* shift: 3.0\n* steps: 16\n* sampler: lcm\n* scheduler: normal\n* cfg: 1.0 (no negative prompt)\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 55,
+      "type": "VAELoader",
+      "pos": {
+        "0": 1010,
+        "1": 290
+      },
+      "size": {
+        "0": 310,
+        "1": 60
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            107
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ]
+    },
+    {
+      "id": 73,
+      "type": "Note",
+      "pos": {
+        "0": 172,
+        "1": -240
+      },
+      "size": {
+        "0": 250,
+        "1": 88
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "You can try changing the weight_dtype to fp8 if you are running out of memory."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": {
+        "0": 1020,
+        "1": -19
+      },
+      "size": {
+        "0": 310,
+        "1": 262
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 163
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 21
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 114
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 100
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            160
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        104414639078563,
+        "randomize",
+        30,
+        5,
+        "euler",
+        "simple",
+        1
+      ]
+    },
+    {
+      "id": 54,
+      "type": "QuadrupleCLIPLoader",
+      "pos": {
+        "0": -185,
+        "1": 39
+      },
+      "size": {
+        "0": 400,
+        "1": 130
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            111,
+            112,
+            180
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "QuadrupleCLIPLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        "clip_l_hidream.safetensors",
+        "clip_g_hidream.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "llama_3.1_8b_instruct_fp8_scaled.safetensors"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 70,
+      "type": "ModelSamplingSD3",
+      "pos": {
+        "0": 750,
+        "1": -90
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 181
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            163
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingSD3",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        3.0000000000000004
+      ]
+    },
+    {
+      "id": 80,
+      "type": "LoadLoraFromHF",
+      "pos": {
+        "0": 964,
+        "1": -414
+      },
+      "size": {
+        "0": 327.5999755859375,
+        "1": 150
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadLoraFromHF"
+      },
+      "widgets_values": [
+        1,
+        1,
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 69,
+      "type": "UNETLoader",
+      "pos": {
+        "0": -189,
+        "1": -91
+      },
+      "size": {
+        "0": 400,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            179
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        "hidream_i1_full_fp16.safetensors",
+        "default"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 40,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 530,
+        "1": 260
+      },
+      "size": {
+        "0": 432,
+        "1": 192
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 112
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            114
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "Negative Prompt",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        "blurry"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 16,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 530,
+        "1": 20
+      },
+      "size": {
+        "0": 432,
+        "1": 192
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 111
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            21
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Positive Prompt",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29"
+      },
+      "widgets_values": [
+        "xly, anime style, set against a snowy mountainous landscape with a frozen lake. xly stands with feet planted firmly, fists clenched and held up in front of him, each engulfed in vibrant flames. His expression is fierce, with gritted teeth and furrowed brows, conveying determination and intensity.\n\n\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 81,
+      "type": "LoadLoraFromCivitAI",
+      "pos": {
+        "0": 534,
+        "1": -526
+      },
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 179
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 180
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            181
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadLoraFromCivitAI"
+      },
+      "widgets_values": [
+        1,
+        1,
+        "1682840"
+      ]
+    },
+    {
+      "id": 76,
+      "type": "LoadLoraFromComfyOnline",
+      "pos": {
+        "0": 928,
+        "1": -591
+      },
+      "size": {
+        "0": 425.80462646484375,
+        "1": 126
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadLoraFromComfyOnline"
+      },
+      "widgets_values": [
+        1,
+        1,
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      21,
+      16,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      51,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      100,
+      53,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      107,
+      55,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      111,
+      54,
+      0,
+      16,
+      0,
+      "CLIP"
+    ],
+    [
+      112,
+      54,
+      0,
+      40,
+      0,
+      "CLIP"
+    ],
+    [
+      114,
+      40,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      160,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      163,
+      70,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      179,
+      69,
+      0,
+      81,
+      0,
+      "MODEL"
+    ],
+    [
+      180,
+      54,
+      0,
+      81,
+      1,
+      "CLIP"
+    ],
+    [
+      181,
+      81,
+      0,
+      70,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.39142513012205044,
+      "offset": [
+        380.6697301563321,
+        827.2969657095002
+      ]
+    }
+  },
+  "version": 0.4
+}
